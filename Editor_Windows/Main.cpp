@@ -17,10 +17,11 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 핸들 : 메모리에 올라와있는 다른 프로그램들과 자신을 구분하기 위한 값,
+                                                //해당 값을 이용하여야 메모리에서 이 프로젝트 프로그램에 접근할 수 있다.
+                     _In_opt_ HINSTANCE hPrevInstance, // 바로 앞에 실행된 현재 프로그램의 인스턴스 핸들, 없을 경우에는 NULL 반환
+                     _In_ LPWSTR    lpCmdLine, // 명령행으로 입력된 프로그램 인수 : x 프로그램을 통하여 y 프로그램을 실행할 때, 명령인수를 입력 가능
+                     _In_ int       nCmdShow) // 프로그램이 실행될 형태, 보통 모양 정보 등이 전달된다.
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -97,6 +98,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
+   // Window를 생성하고 해당 프로그램의 인스턴스 핸들을 반환함
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
