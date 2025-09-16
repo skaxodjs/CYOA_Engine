@@ -45,7 +45,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
 
     // 기본 메시지 루프입니다:
     while (GetMessage(&msg, nullptr, 0, 0))
-    {
+    {  
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
         {
             TranslateMessage(&msg);
@@ -147,8 +147,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
+            HDC hdc = BeginPaint(hWnd, &ps); // HDC : 화면 출력에 필요한 모든 정보를 가지는 데이터 구조체, GDI 모듈에 의해서 관리됨
+                                             // 폰트, 색상, 굵기 등 글씨부터 시작하여 화면 출력에 필요한 모든 경우는 WINAPI에서는 HDC를 통하여 작업을 진행한다
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            Rectangle(hdc,100, 100, 200, 200);
             EndPaint(hWnd, &ps);
         }
         break;
