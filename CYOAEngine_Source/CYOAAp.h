@@ -1,7 +1,26 @@
 #pragma once
-class CYOAAp
+#include "Common.h"
+#include "GameObject.h"
+namespace CYOA
 {
-public:
-	void test();
-};
+	class CYOAAp
+	{
+	public:
+		CYOAAp();
+		~CYOAAp();
+
+		void Initialize(HWND hwnd);
+		void Run();
+
+		void Update();
+		void LateUpdate();
+
+		void Render();
+	private:
+		HWND mHwnd;
+		HDC mHdc;
+		GameObject mPlayer;
+	};
+}
+
 

@@ -5,7 +5,7 @@
 #include "Editor_Windows.h"
 #include "CYOAAp.h"
 
-CYOAAp app;
+CYOA::CYOAAp app;
 
 #define MAX_LOADSTRING 100
 
@@ -30,7 +30,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
-    app.test();
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_EDITORWINDOWS, szWindowClass, MAX_LOADSTRING);
@@ -64,10 +63,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
         else
         {
             //메세지가 없는 경우
+            app.Run();
         }
    }
     
-    
+    /*
     while (GetMessage(&msg, nullptr, 0, 0))
     {  
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -76,7 +76,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
             DispatchMessage(&msg);
         }
     }
-
+    */
     return (int) msg.wParam;
 }
 
@@ -125,7 +125,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    // Window를 생성하고 해당 프로그램의 인스턴스 핸들을 반환함
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
+   app.Initialize(hWnd);
    if (!hWnd)
    {
       return FALSE;
@@ -170,12 +170,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_PAINT:
         {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps); // HDC : 화면 출력에 필요한 모든 정보를 가지는 데이터 구조체, GDI 모듈에 의해서 관리됨
-                                             // 폰트, 색상, 굵기 등 글씨부터 시작하여 화면 출력에 필요한 모든 경우는 WINAPI에서는 HDC를 통하여 작업을 진행한다
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            Rectangle(hdc,100, 100, 200, 200);
-            EndPaint(hWnd, &ps);
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps); 
+        // HDC : 화면 출력에 필요한 모든 정보를 가지는 데이터 구조체, GDI 모듈에 의해서 관리됨
+        // 폰트, 색상, 굵기 등 글씨부터 시작하여 화면 출력에 필요한 모든 경우는 WINAPI에서는 HDC를 통하여 작업을 진행한다
+        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+        EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
