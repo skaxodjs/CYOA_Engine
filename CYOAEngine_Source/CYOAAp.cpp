@@ -1,5 +1,5 @@
 #include "CYOAAp.h"
-
+#include "Input.h"
 
 namespace CYOA
 {
@@ -19,6 +19,7 @@ namespace CYOA
 	{
 		mHwnd = hwnd;
 		mHdc = GetDC(hwnd);
+		Input::Initailize();
 
 	}
 
@@ -33,6 +34,7 @@ namespace CYOA
 	void CYOAAp::Update()
 	{
 		mPlayer.Update();
+		Input::Update();
 	}
 
 
