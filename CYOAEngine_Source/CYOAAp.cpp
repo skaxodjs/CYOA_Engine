@@ -1,5 +1,6 @@
 #include "CYOAAp.h"
 #include "Input.h"
+#include "ETime.h"
 
 namespace CYOA
 {
@@ -20,6 +21,7 @@ namespace CYOA
 		mHwnd = hwnd;
 		mHdc = GetDC(hwnd);
 		Input::Initailize();
+		ETime::Initailize();
 
 	}
 
@@ -35,6 +37,7 @@ namespace CYOA
 	{
 		mPlayer.Update();
 		Input::Update();
+		ETime::Update();
 	}
 
 
@@ -46,6 +49,7 @@ namespace CYOA
 	void CYOAAp::Render()
 	{
 		mPlayer.Render(mHdc);
+		ETime::Render(mHdc);
 	}
 	
 }
